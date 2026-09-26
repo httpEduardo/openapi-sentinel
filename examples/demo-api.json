@@ -1,0 +1,32 @@
+{
+  "openapi": "3.0.3",
+  "info": { "title": "Demo API", "version": "1.0.0" },
+  "servers": [{ "url": "http://api.example.com/v1" }],
+  "security": [{ "bearerAuth": [] }],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" },
+      "legacyKey": { "type": "apiKey", "in": "query", "name": "api_key" }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": { "summary": "Health check", "security": [], "x-public": true }
+    },
+    "/sessions": {
+      "post": { "summary": "Log in", "security": [] }
+    },
+    "/admin/users": {
+      "get": { "summary": "List users", "security": [] },
+      "delete": { "summary": "Delete a user" }
+    },
+    "/reports/{id}": {
+      "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+      "get": { "summary": "Read a report", "security": [{ "bearerAuth": [] }, {}] },
+      "put": { "summary": "Update a report", "security": [{ "oauth2": ["reports:write"] }] }
+    },
+    "/v1/export": {
+      "get": { "summary": "Old export endpoint", "deprecated": true, "security": [{ "legacyKey": [] }] }
+    }
+  }
+}

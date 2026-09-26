@@ -1,3 +1,3 @@
-module openapi-sentinel
+module github.com/httpEduardo/openapi-sentinel
 
 go 1.21
